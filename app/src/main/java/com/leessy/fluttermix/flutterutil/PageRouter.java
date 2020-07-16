@@ -34,8 +34,7 @@ public class PageRouter {
 
     public static boolean openPageByUrl(Context context, String url, Map params, int requestCode) {
         String path = url.split("\\?")[0];
-        Log.i("openPageByUrl--", url);
-        Log.i("openPageByUrl", path);
+        Log.i("openPageByUrl", path+"  context:"+context);
         try {
             if (pageName.containsKey(path)) {
                 Intent intent = BoostFlutterActivity.withNewEngine().url(pageName.get(path)).params(params)
@@ -46,9 +45,11 @@ public class PageRouter {
                 } else {
                     context.startActivity(intent);
                 }
+                Log.i("openPageByUrl", path+"   intent:"+intent);
                 return true;
             } else if (url.startsWith(FLUTTER_FRAGMENT_PAGE_URL)) {
 //                context.startActivity(new Intent(context, FlutterFragmentPageActivity.class));
+
                 return true;
             } else if (url.startsWith(NATIVE_PAGE_URL)) {
                 //flutter启动一个native 页

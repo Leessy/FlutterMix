@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boost/flutter_boost.dart';
 import 'package:flutter_module/page/FirstRouteWidget.dart';
 import 'package:flutter_module/page/SecondRouteWidget.dart';
+import 'package:flutter_module/page/TakePictureScreen.dart';
 import 'package:flutter_module/page/ViewWidget.dart';
 
 void main() => runApp(MyHomePage());
 
 //class MyApp extends StatelessWidget {
-// This widget is the root of your application.
-//
 //  @override
 //  Widget build(BuildContext context) {
 //    return MaterialApp(
@@ -17,10 +16,14 @@ void main() => runApp(MyHomePage());
 //        primarySwatch: Colors.blue,
 //      ),
 //      home: MyHomePage(title: 'FlutterMix--1'),
-//      builder: FlutterBoost.init(),
+//      builder: FlutterBoost.init(postPush: _onRoutePushed),
 //    );
 //  }
 //
+//  void _onRoutePushed(
+//      String pageName, String uniqueId, Map params, Route route, Future _) {
+//    debugPrint("pageName :${pageName}" + "   params :${params.toString()}");
+//  }
 //}
 
 class MyHomePage extends StatefulWidget {
@@ -37,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     FlutterBoost.singleton.registerPageBuilders({
       //fisrt widget
-     "flutterbus://flutter_FirstPage": (pageName, params, _) {
+      "flutterbus://flutter_FirstPage": (pageName, params, _) {
         debugPrint("params :${params.toString()}");
         return FirstRouteWidget();
       },
@@ -58,12 +61,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Boost example',
-        builder: FlutterBoost.init(),
+        builder: FlutterBoost.init(postPush: _onRoutePushed),
         home: Container(color: Colors.white));
   }
-
   void _onRoutePushed(
       String pageName, String uniqueId, Map params, Route route, Future _) {
-    debugPrint("pageName :${pageName}" + "params :${params.toString()}");
+    debugPrint("pageName :${pageName}" + "   params :${params.toString()}");
   }
 }
